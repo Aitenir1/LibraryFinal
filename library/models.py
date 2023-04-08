@@ -4,18 +4,6 @@ from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 
 
-class Book(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=200)
-    author = models.ManyToManyField('Author')
-    description = models.TextField(blank=True, null=True, default='It is a new book')
-    category = models.ManyToManyField('Category')
-    pub_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return self.title
-
-
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
     name = models.CharField(max_length=100)
@@ -25,6 +13,38 @@ class Category(models.Model):
 
     def __repr__(self) -> str:
         return self.name
+
+
+class Publisher(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Author(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Book(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(null=True)
+    title = models.CharField(max_length=200)
+    author = models.ManyToManyField(Author)
+    description = models.TextField(blank=True, null=True, default='It is a new book')
+    category = models.ManyToManyField(Category)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    cover = models.ImageField(null=True, blank=True, default='image1.jpeg')
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class Instance(models.Model):
@@ -37,19 +57,17 @@ class Instance(models.Model):
     def __str__(self):
         return f"{Book.objects.get(id=self.book.id).title} - {self.code}"
 
-    # def
-
 
 class Borrower(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    # first_name = models.CharField(max_length=100)
+    # last_name = models.CharField(max_length=100)
+    # email = models.EmailField()
     debt = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.last_name} {self.first_name}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 def get_time():
@@ -70,21 +88,3 @@ class InstanceBorrower(models.Model):
         borrower = Borrower.objects.get(id=self.borrower.id)
 
         return f"{borrower.first_name} {borrower.last_name} - {instance}"
-
-
-class Publisher(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    name = models.CharField(max_length=200)
-    address = models.CharField(max_length=100)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Author(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    name = models.CharField(max_length=200)
-    email = models.CharField(max_length=100)
-
-    def __str__(self) -> str:
-        return self.name

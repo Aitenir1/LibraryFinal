@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_link %}
+    <link rel="stylesheet" href="{% static 'book-list/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Publication Date</th>
+			</tr>
+		</thead>
+		<tbody>
+        {% for book in books %}
+			<tr>
+				<td><a href="{% url 'book-detail' book.id %}">{{ book.title }}</a></td>
+				<td>{{ book.author.all|join:", " }} {{ book.instance_count }}</td>
+				<td>{{ book.pub_date|date:"Y" }}</td>
+			</tr>
+        {% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
