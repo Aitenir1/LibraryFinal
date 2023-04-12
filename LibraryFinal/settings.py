@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'libraryfinal',
-        'USER': 'aitenirzhamakeev',
-        'PASSWORD': '283144',
+        'USER': 'postgres',
+        'PASSWORD': 'Asadbek008',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -149,4 +149,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'tenirbook@gmail.com'
-EMAIL_HOST_PASSWORD = 'zhzybcjxeijgzbzn'
+EMAIL_HOST_PASSWORD = 'mmjftmsbtqjjuztk'
+

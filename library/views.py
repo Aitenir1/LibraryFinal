@@ -37,6 +37,7 @@ class BooksListView(ListView):
         return queryset
 
 
+# Class based views
 class BookDetailView(DetailView):
     model = Book
     template_name = 'crud/book-detail.html'
