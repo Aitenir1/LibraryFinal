@@ -10,6 +10,11 @@
         .delete {
             background-image: url("{% static 'icons/delete.png' %}");
         }
+        .books {
+            background-image: url("{% static 'icons/book2.png' %}");
+            filter: invert(100%);
+
+        }
     </style>
 {% endblock %}
 
@@ -20,13 +25,17 @@
             <div class="title_icons">
                 <h1>{{ object.title }}</h1>
                 <div class="icons">
-                    {{ instances }}
+                        {{ instances }}
+                    <a href="{% url 'book-exemplars-list' object.id %}">
+
+                        <div class="books"></div>
+                    </a>
 
                     <a href="{% url 'book-edit' object.id %}">
                         <div class="edit"></div>
                     </a>
                     <a href="{% url 'book-delete' object.id %}">
-                    <div class="delete"></div>
+                        <div class="delete"></div>
                     </a>
                 </div>
             </div>
