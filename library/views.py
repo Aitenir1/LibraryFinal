@@ -47,6 +47,7 @@ class BooksListView(ListView):
         return queryset
 
 
+# Class based views
 class BookDetailView(DetailView):
     model = Book
     template_name = 'crud/book-detail.html'
@@ -106,4 +107,3 @@ class CreateUser(CreateView):
 
         response = super().form_valid(form)
         return response
-
