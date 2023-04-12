@@ -2,10 +2,9 @@
     <a href="{% url 'home' %}" class="logo">library</a>
 
     <ul>
-        <li><a href="#">Users</a></li>
+        <li><a href="{% url 'user-list' %}">Users</a></li>
         <li><a href="{% url 'home' %}">Catalog</a></li>
         <li><a href="{% url 'book-create' %}">Add a new book</a></li>
-        <li><a href="{% url 'create-user' %}">Create a new user</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
 </header>

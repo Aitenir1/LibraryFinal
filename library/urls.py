@@ -39,15 +39,36 @@ urlpatterns = [
         name='book-delete'
     ),
     path(
-        route='email',
-        view=views.send_email,
-        # name=[]
+        route='create-user',
+        view=login_required(views.CreateUserView.as_view()),
+        name='create-user'
     ),
     path(
-        route='create-user',
-        view=login_required(views.CreateUser.as_view()),
-        name='create-user'
+        route='user-list',
+        view=login_required(views.UserListView.as_view()),
+        name='user-list'
+    ),
+    path(
+        route='book-exemplars-list/<str:book>',
+        view=login_required(views.BookExemplarListView.as_view()),
+        name='book-exemplars-list'
+    ),
+    path(
+        route='book-exemplar-create/<str:book>',
+        view=login_required(views.BookExemplarCreateView.as_view()),
+        name='book-exemplar-create'
+    ),
+    path(
+        route='exemplar-detail/<str:pk>',
+        view=login_required(views.ExemplarDetailView.as_view()),
+        name='exemplar-detail'
+    ),
+    path(
+        route='borrow/<str:exemplar>',
+        view=login_required(views.BorrowCreateView.as_view()),
+        name='borrow'
     )
+
 ]
 
 
