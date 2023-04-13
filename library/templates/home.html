@@ -3,6 +3,25 @@
 
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'book-list/style.css' %}">
+	<link rel="stylesheet" href="{% static 'book-detail/style.css' %}">
+    <style>
+        .edit {
+            background-image: url("{% static 'icons/edit.png' %}");
+        }
+        .delete {
+            background-image: url("{% static 'icons/delete.png' %}");
+        }
+        .books {
+            background-image: url("{% static 'icons/book2.png' %}");
+            filter: invert(20%);
+			max-width: 50px;
+			max-height: 50px;
+        }
+		.book-info img{
+			width: 150px;
+			height: 200px;
+		}
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -17,7 +36,12 @@
 		<tbody>
         {% for book in books %}
 			<tr>
-				<td><a href="{% url 'book-detail' book.id %}">{{ book.title }}</a></td>
+				<td>
+					<a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
+					<div class="book-info">
+						<img src="{{ book.cover.url }}" alt="">
+					</div>
+				</td>
 				<td>{{ book.author.all|join:", " }}</td>
 				<td>{{ book.pub_date|date:"Y" }}</td>
 			</tr>
