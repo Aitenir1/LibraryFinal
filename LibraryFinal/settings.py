@@ -77,6 +77,19 @@ WSGI_APPLICATION = 'LibraryFinal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Remote database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'L8TouP6zgANeoWXh',
+#         'HOST': 'db.ehpgjpjijfljxxigyytm.supabase.co',
+#         'PORT': '5432',
+#     }
+# }
+
+# Local database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -87,6 +100,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 
 # Password validation
