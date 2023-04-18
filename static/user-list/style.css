@@ -1,0 +1,68 @@
+.user_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: black;
+    /*height: 1000px;*/
+}
+
+.user_list .user {
+    margin: .4em auto;
+    width: 90%;
+    border: 1px black solid;
+    padding: 1em;
+    border-radius: 2em;
+    display: flex;
+    justify-content: space-between;
+    /*box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);*/
+    transition: .2s all linear;
+    cursor: pointer;
+    /*color: black;*/
+
+}
+
+p {
+    font-size: 16px;
+     color: grey;
+}
+
+.user_list .user:hover {
+    background-color: #e6e6e6;
+    /*margin: 0 auto;*/
+    padding: 1.5em;
+}
+
+.user_list .debt {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.new_user {
+    margin: .4em auto;
+    width: 90%;
+    border: .5px grey solid;
+    padding: .8em;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    transition: .2s all linear;
+    cursor: pointer;
+    color: grey;
+
+}
+
+.name_status {
+    display: flex;
+    align-items: center;
+}
+
+.status {
+    width: 1em;
+    height: 1em;
+    /*background-color: red;*/
+    margin-left: .8em;
+}

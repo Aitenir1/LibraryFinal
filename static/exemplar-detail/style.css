@@ -1,0 +1,45 @@
+.exemplar_info {
+    display: flex;
+    flex-direction: column;
+}
+
+span {
+    /*margin-bottom: .1em;*/
+}
+
+.username_actions {
+    font-size: .8em;
+    color: grey;
+}
+
+.username_actions a {
+    color: grey;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #727ab5
+}
+
+.status {
+    font-size: 1em;
+    text-decoration: underline;
+}
+
+.available {
+    color: #3CB371;
+    text-decoration-color: #3CB371;
+}
+
+.borrowed {
+    color: #DC143C;
+    text-decoration-color: #DC143C;
+}
+
+.code, .author {
+    font-size: .9em;
+    color: #474747;
+}
