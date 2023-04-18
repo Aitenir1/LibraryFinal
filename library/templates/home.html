@@ -18,32 +18,30 @@
 			max-height: 50px;
         }
 		.book-info img{
-			width: 150px;
-			height: 200px;
+			width: 100px;
+			height: 160px;
+			margin-top: 20px;
 		}
     </style>
 {% endblock %}
 
 {% block content %}
     <table>
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Publication Date</th>
-			</tr>
-		</thead>
 		<tbody>
         {% for book in books %}
 			<tr>
 				<td>
-					<a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
-					<div class="book-info">
-						<img src="{{ book.cover.url }}" alt="">
+					<div class="each">
+						<div class="book-info">
+							<img src="{{ book.cover.url }}" alt="">
+							<a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
+						</div>
+						<div class="info">
+							<p><td><h1>name of author</h1>{{ book.author.all|join:", " }}</td></p>
+							<p><td><h1>data of publishes</h1>{{ book.pub_date|date:"Y" }}</td></p>
+						</div>
 					</div>
 				</td>
-				<td>{{ book.author.all|join:", " }}</td>
-				<td>{{ book.pub_date|date:"Y" }}</td>
 			</tr>
         {% endfor %}
 		</tbody>
