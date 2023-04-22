@@ -4,6 +4,7 @@
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'book-list/style.css' %}">
 	<link rel="stylesheet" href="{% static 'book-detail/style.css' %}">
+	<link rel="stylesheet" href="">
     <style>
         .edit {
             background-image: url("{% static 'icons/edit.png' %}");
@@ -22,18 +23,23 @@
 			height: 160px;
 			margin-top: 20px;
 		}
+		@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,300&display=swap');
     </style>
 {% endblock %}
 
 {% block content %}
-    <form method="get">
-        {% csrf_token %}
-        <input type="text" name="search" placeholder="Search...">
-        <input type="submit">
-    </form>
+    <div class="get">
+		<form method="get">
+			{% csrf_token %}
+			<input type="text" name="search" placeholder="Search...">
+			<input class="search" type="submit">
+		</form>
+	</div>
 
-    <a href="{% url 'book-create' %}">Add a new book</a>
-
+	<div class="add">
+		<a href="{% url 'book-create' %}">Add a new book</a>
+	</div>
+    
     <table>
 		<tbody>
         {% for book in books %}
@@ -55,10 +61,12 @@
 
 		</tbody>
 	</table>
-    {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous </a>
-    {% endif %}
-    {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
-    {% endif %}
+    <div class="back">
+		{% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"> Previous </a>
+    	{% endif %}
+    	{% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"> Next </a>
+    	{% endif %}
+	</div>
 {% endblock %}

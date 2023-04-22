@@ -12,13 +12,13 @@ h1{
 }
 
 .info{
-    padding-left: 20px;
-    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 tbody{
     background-color: lightgrey;
-    border: 5px solid grey;
+    border: 2px solid grey;
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -28,3 +28,62 @@ tbody{
     flex-direction: column;
 }
 
+.back{
+    font-size: 20px;
+    text-align: center;  
+    margin-top: 20px;  
+}
+
+.back a{
+    border: 2px solid black;
+    border-radius: 3px;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family:'Times New Roman', Times, serif ;
+}
+
+.back a:hover{
+    background-color: grey;
+}
+
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.search{
+    width: 100px;
+    margin: 8px 8px;
+    box-sizing: border-box;
+}
+
+.get{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add{
+    float: right;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 8px 15px;
+}
+
+.add a{
+    font-size: 15px;
+    font-style: initial;
+    font-variant: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add:hover{
+    background-color: grey;
+}

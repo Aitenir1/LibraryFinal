@@ -8,9 +8,9 @@
 {% block content %}
     <div class="exemplar_info">
         <div class="username_actions">
-            <span>User {{ object.user.username }} | </span>
-            <a href="{% url 'borrower-update' object.id %}">Edit | </a>
-            <a href="">Delete | </a>
+            <span>User: {{ object.user.username }}</span>
+            <a href="{% url 'borrower-update' object.id %}">Edit</a>
+            <a href="">Delete</a>
         </div>
 
         <div class="title">
