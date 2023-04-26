@@ -31,7 +31,7 @@
     <div class="get">
 		<form method="get">
 			{% csrf_token %}
-			<input type="text" name="search" placeholder="Search...">
+			<input class="sea" type="text" name="search" placeholder="Search...">
 			<input class="search" type="submit">
 		</form>
 	</div>
@@ -51,8 +51,8 @@
 							<a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
 						</div>
 						<div class="info">
-							<p><td><h1>name of author</h1>{{ book.author.all|join:", " }}</td></p>
-							<p><td><h1>data of publishes</h1>{{ book.pub_date|date:"Y" }}</td></p>
+							<p><td><h1>Name of Author</h1>{{ book.author.all|join:", " }}</td></p>
+							<p><td><h1>Data of Publishes</h1>{{ book.pub_date|date:"Y" }}</td></p>
 						</div>
 					</div>
 				</td>
