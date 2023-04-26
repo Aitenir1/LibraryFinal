@@ -87,3 +87,15 @@ input{
 .add:hover{
     background-color: grey;
 }
+
+td{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+tr{
+    display: flex;
+    flex-direction: row;
+}
+
