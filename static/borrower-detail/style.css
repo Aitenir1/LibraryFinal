@@ -3,38 +3,30 @@
     flex-direction: column;
 }
 
-span {
-    /*margin-bottom: .1em;*/
-}
-
-.username_actions {
-    font-size: .8em;
-    color: grey;
-}
-
-.username_actions a {
-    color: grey;
-    text-decoration: none;
+.exemplar_info{
+    font-size: 15px;
+    margin: 0.4em auto;
+    width: 90%;
+    border: 1px black solid;
+    padding: 1em;
+    border-radius: 2em;
+    display: flex;
+    justify-content: space-between;
+    /* box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1); */
+    transition: .2s all linear;
     cursor: pointer;
 }
 
-.title {
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #727ab5
-}
-
-.fine a {
-    font-size: 1em;
+a{
     text-decoration: none;
-    color: #DC143C;
 }
 
-
-.code, .author {
-    font-size: .9em;
-    color: #474747;
+.username_actions a{
+    padding-left: 50px;
 }
+
+.username_actions span{
+    font-size: 40;
 
 .yes {
     cursor: pointer;
