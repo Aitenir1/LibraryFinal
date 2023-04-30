@@ -14,14 +14,17 @@ class BorrowCreateView(CreateView):
     template_name = 'crud/form.html'
 
     def form_valid(self, form):
-        last_borrow = Borrow.objects.filter(borrower=form.instance.borrower).last()
+        try:
+            last_borrow = Borrow.objects.filter(borrower=form.instance.borrower).latest('end')
 
+        except:
+            last_borrow = None
         if form.instance.borrower.debt:
             form.add_error('borrower', 'The user has\'t paid the fine')
 
             return self.form_invalid(form)
 
-        if last_borrow is not None and timezone.now() < last_borrow.end:
+        if last_borrow is not None and last_borrow.status:
             form.add_error('borrower', 'The user has already borrowed a book')
 
             return self.form_invalid(form)

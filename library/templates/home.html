@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load has_group %}
 
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'book-list/style.css' %}">
@@ -12,7 +13,13 @@
         <input type="submit">
     </form>
 
-    <a href="{% url 'book-create' %}">Add a new book</a>
+    {% if request.user|has_group:"students" %}
+        Student
+
+    {% else %}
+        Staff
+        <a href="{% url 'book-create' %}">Add a new book</a>
+    {% endif %}
 
     <table>
 		<thead>
