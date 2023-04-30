@@ -12,6 +12,10 @@ class Borrower(models.Model):
 
     class Meta:
         ordering = ['id']
+        permissions = [
+            ('detail_view_borrower', 'Can Detail view Borrower'),
+            ('list_view_borrower', 'Can List view Borrower')
+        ]
 
     def __str__(self):
         # self.bor
@@ -46,6 +50,13 @@ class Book(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     cover = models.ImageField(null=True, blank=True, default='image1.jpeg')
 
+    # class Meta:
+    #     permissions = [
+    #         ('view_book', 'Can view book'),
+    #         ('add_book', 'Can add book'),
+    #
+    #     ]
+
     def __str__(self) -> str:
         return self.title
 
@@ -65,13 +76,17 @@ class Exemplar(models.Model):
 
     class Meta:
         ordering = ['code']
+        permissions = [
+            ('detail_view_exemplar', 'Can Detail view Exemplar'),
+            ('list_view_exemplar', 'Can List view Exemplar')
+        ]
 
     def __str__(self):
         return f"{Book.objects.get(id=self.book.id).title} - {self.code}"
 
 
 def get_time():
-    return datetime.now() + timedelta(minutes=3)
+    return datetime.now() + timedelta(seconds=5)
 
 
 class Borrow(models.Model):
@@ -89,7 +104,6 @@ class Borrow(models.Model):
 
     def __str__(self):
         instance = Exemplar.objects.get(id=self.exemplar.id)
-        # book = Book.objects.get(id=instance.book.id)
 
         borrower = Borrower.objects.get(id=self.borrower.id)
 

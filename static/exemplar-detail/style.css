@@ -43,3 +43,16 @@ span {
     font-size: .9em;
     color: #474747;
 }
+
+.borrow {
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: #c1c1c1;
+    color: #474747;
+}
+
+.active {
+    color: #2D4262;
+    background-color: #D09683;
+}

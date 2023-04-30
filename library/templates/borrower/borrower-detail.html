@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load has_group %}
 
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'borrower-detail/style.css' %}">
@@ -8,9 +9,12 @@
 {% block content %}
     <div class="exemplar_info">
         <div class="username_actions">
+            {% if request.user|has_group:"bosses" %}
             <span>User: {{ object.user.username }}</span>
             <a href="{% url 'borrower-update' object.id %}">Edit</a>
             <a href="">Delete</a>
+            {% endif %}
+
         </div>
 
         <div class="title">
@@ -20,18 +24,22 @@
 
         {% if exemplar != 0%}
             <h4>{{ exemplar }}</h4>
-            <span class="fine no">
-                <a href="{% url 'end-borrow' object.id %}" class="status available">
-                    End the borrow
-                </a>
-            </span>
+            {% if request.user|has_group:"bosses" %}
+                <span class="fine no">
+                    <a href="{% url 'end-borrow' object.id %}" class="status available">
+                        End the borrow
+                    </a>
+                </span>
+            {% endif %}
         {% endif %}
         {% if object.debt > 0 %}
+            {% if request.user|has_group:"bosses" %}
             <span class="fine yes">
                 <a href="{% url 'clear-fine' object.id %}" class="status available">
                     Clear the fine
                 </a>
             </span>
+                {% endif %}
         {% else %}
             <span class="fine no">
 
@@ -40,6 +48,14 @@
                 </a>
             </span>
         {% endif %}
-
+        <div class="borrows">
+            {% for borrow in borrows %}
+                <div class="borrow {% if borrow.status %}active{% endif %}">
+                    <div class="borrower">{{ borrow.exemplar }}</div>
+                    <div class="start">Start: <i>{{ borrow.start|date:'Y-m-d | h-i-s' }}</i></div>
+                    <div class="end">End: <i>{{ borrow.end|date:'Y-m-d | h-i-s' }}</i></div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

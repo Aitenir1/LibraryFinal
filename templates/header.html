@@ -1,8 +1,14 @@
+{% load has_group %}
 <header>
     <a href="{% url 'home' %}" class="logo">library</a>
 
     <ul>
-        <li><a href="{% url 'borrower-list' %}">Users</a></li>
+        {% if request.user|has_group:'bosses' %}
+            <li><a href="{% url 'borrower-list' %}">Users</a></li>
+        {% else %}
+            <li><a href="{% url 'borrower-detail' request.user.borrower.id %}">Profile</a></li>
+        {% endif %}
+
         <li><a href="{% url 'home' %}">Catalog</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>

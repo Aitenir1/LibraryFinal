@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -11,16 +13,17 @@ from django.core.mail import send_mail
 from django.db.models import Q
 
 
-class BorrowerListView(ListView):
+class BorrowerListView(UserPassesTestMixin, ListView):
     model = Borrower
     template_name = 'borrower/borrower-list.html'
     context_object_name = 'users'
     ordering = 'id'
 
+    def test_func(self):
+        return self.request.user.has_perm('library.view_borrower')
+
     def get_queryset(self):
         search = self.request.GET.get('search', '')
-        print(search)
-
 
         queryset = super().get_queryset().filter(
             Q(user__first_name__icontains=search)
@@ -36,12 +39,22 @@ class BorrowerListView(ListView):
         return queryset
 
 
-class BorrowerDetailView(DetailView):
+class BorrowerDetailView(UserPassesTestMixin, DetailView):
     model = Borrower
     template_name = 'borrower/borrower-detail.html'
 
+    def test_func(self):
+        return self.request.user.has_perm('library.detail_view_borrower')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        borrows = Borrow.objects.filter(borrower=self.object)
+
+        if borrows and borrows.latest('end').status:
+            borrows.latest('end').calculate_fine()
+
+        context['borrows'] = borrows.order_by('end').reverse()
         context['exemplar'] = self.object.has_exemplar()
 
         return context
@@ -52,6 +65,9 @@ class BorrowerCreateView(CreateView):
     form_class = MyUserCreationForm
     template_name = 'crud/form.html'
     success_url = reverse_lazy('home')
+
+    def test_func(self):
+        return self.request.user.has_perm('library.create_borrower')
 
     def form_valid(self, form):
         password = User.objects.make_random_password()
@@ -74,10 +90,13 @@ class BorrowerCreateView(CreateView):
         return response
 
 
-class BorrowerUpdateView(UpdateView):
+class BorrowerUpdateView(UserPassesTestMixin, UpdateView):
     model = Borrower
     form_class = MyUserCreationForm
     template_name = 'crud/form.html'
+
+    def test_func(self):
+        return self.request.user.has_perm('library.change_borrower')
 
     def get_object(self, queryset=None):
         return self.request.user

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load has_group %}
 
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'book-detail/style.css' %}">
@@ -31,12 +32,14 @@
                         <div class="books"></div>
                     </a>
 
-                    <a href="{% url 'book-edit' object.id %}">
-                        <div class="edit"></div>
-                    </a>
-                    <a href="{% url 'book-delete' object.id %}">
-                        <div class="delete"></div>
-                    </a>
+                    {% if request.user|has_group:"bosses" %}
+                        <a href="{% url 'book-edit' object.id %}">
+                            <div class="edit"></div>
+                        </a>
+                        <a href="{% url 'book-delete' object.id %}">
+                            <div class="delete"></div>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 

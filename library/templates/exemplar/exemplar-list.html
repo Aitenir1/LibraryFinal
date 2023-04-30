@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load has_group %}
 
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'exemplar-list/style.css' %}">
@@ -16,14 +17,19 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'exemplar-create' book %}">
-        <div class="new_user">
-            Add a new exemplar
-        </div>
-    </a>
+    {% if request.user|has_group:"bosses" %}
+        <a href="{% url 'exemplar-create' book %}">
+            <div class="new_user">
+                Add a new exemplar
+            </div>
+        </a>
+    {% endif %}
     <div class="user_list">
     {% for exemplar in exemplars %}
-        <a href="{% url 'exemplar-detail' exemplar.id %}">
+        {% if request.user|has_group:"bosses" %}
+            <a href="{% url 'exemplar-detail' exemplar.id %}">
+        {% endif %}
+
             <div class="user">
                 <div class="user_info">
                     <div class="name_status">
@@ -34,7 +40,10 @@
 
                 </div>
             </div>
-        </a>
+        {% if request.user|has_group:"bosses" %}
+            </a>
+        {% endif %}
+
     {% endfor %}
     </div>
 

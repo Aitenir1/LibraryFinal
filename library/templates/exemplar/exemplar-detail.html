@@ -22,6 +22,14 @@
                 </a>
             {% endif %}
         </span>
-
+        <div class="borrows">
+            {% for borrow in borrows %}
+                <div class="borrow {% if borrow.status %}active{% endif %}">
+                    <div class="borrower">{{ borrow.borrower }}</div>
+                    <div class="start">Start: <i>{{ borrow.start|date:'Y-m-d-h-i-s' }}</i></div>
+                    <div class="end">End: <i>{{ borrow.end|date:'Y-m-d-h-i-s' }}</i></div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
