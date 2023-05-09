@@ -4,76 +4,53 @@
 
 {% block css_link %}
     <link rel="stylesheet" href="{% static 'book-list/style.css' %}">
-	<link rel="stylesheet" href="{% static 'book-detail/style.css' %}">
-	<link rel="stylesheet" href="">
     <style>
-        .edit {
-            background-image: url("{% static 'icons/edit.png' %}");
-        }
-        .delete {
-            background-image: url("{% static 'icons/delete.png' %}");
-        }
-        .books {
-            background-image: url("{% static 'icons/book2.png' %}");
-            filter: invert(20%);
-			max-width: 50px;
-			max-height: 50px;
-        }
-		.book-info img{
-			width: 100px;
-			height: 160px;
-			margin-top: 20px;
-		}
-		@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@1,300&display=swap');
+
+
+
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="get">
-		<form method="get">
-			{% csrf_token %}
-			<input class="sea" type="text" name="search" placeholder="Search...">
-			<input class="search" type="submit">
-		</form>
-	</div>
-  {% if request.user|has_group:"students" %}
-        Student
 
-    {% else %}
-        Staff
-        <a href="{% url 'book-create' %}">Add a new book</a>
-    {% endif %}
-	<div class="add">
-		<a href="{% url 'book-create' %}">Add a new book</a>
-	</div>
-    
-    <table>
-		<tbody>
-        {% for book in books %}
-			<tr>
-				<td>
-					<div class="each">
-						<div class="book-info">
-							<img src="{{ book.cover.url }}" alt="">
-							<a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
-						</div>
-						<div class="info">
-							<p><td><h1>Name of Author</h1>{{ book.author.all|join:", " }}</td></p>
-							<p><td><h1>Data of Publishes</h1>{{ book.pub_date|date:"Y" }}</td></p>
-						</div>
-					</div>
-				</td>
-			</tr>
-        {% endfor %}
 
-		</tbody>
-	</table>
-    <div class="back">
-		{% if page_obj.has_previous %}
+<form method="get">
+    {% csrf_token %}
+    <input class="sea" type="text" name="search" placeholder="Search...">
+    <input class="search" type="submit">
+</form>
+<div class="book_list">
+    {% for book in books %}
+{#        <div class="book" style="background-image: url('{{ book.cover.url }}');";>#}
+{#        <a href="{% url 'book-detail' book.id %}">#}
+        <div class="book">
+            <img src="{{ book.cover.url }}" alt="">
+            <a href="{% url 'book-detail' book.id %}">
+                <div class="book_info">
+                    <div class="title">
+                        <a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
+                    </div>
+
+                    <div class="author">
+                        {{ book.author.all|join:", "|truncatechars:14}}
+                    </div>
+
+                    <div class="pub_date">
+                        {{ book.pub_date|date:"Y" }}
+                    </div>
+                </div>
+            </a>
+        </div>
+{#        </a>#}
+    {% endfor %}
+</div>
+
+<div class="back">
+    {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}"> Previous </a>
-    	{% endif %}
-    	{% if page_obj.has_next %}
+    {% endif %}
+    {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}"> Next </a>
-    	{% endif %}
-	</div>
+    {% endif %}
+</div>
 {% endblock %}

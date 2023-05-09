@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from library.models import Borrower, Borrow
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 from library.Forms import MyUserCreationForm
 
@@ -29,9 +30,7 @@ class BorrowerListView(UserPassesTestMixin, ListView):
             Q(user__first_name__icontains=search)
         )
 
-        # for borrower in queryset:
-        #     borrower.can_borrow_book()
-        #     print(borrower.has_exemplar())
+
 
         for borrow in Borrow.objects.filter(status=1):
             borrow.calculate_fine()
@@ -75,6 +74,9 @@ class BorrowerCreateView(CreateView):
         user = form.save(commit=False)
         user.set_password(password)
         user.save()
+
+        students_group = Group.objects.get(name='students')
+        students_group.user_set.add(user)
 
         borrower = Borrower(user=user)
         borrower.save()

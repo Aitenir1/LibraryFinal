@@ -1,19 +1,53 @@
-.book_info{
+.book_info {
     display: flex;
-    flex-direction: row;
 }
 
-
-img{
-    width: 250px;
-    height: 400px;
-    margin-right: 100px;
+.book_info img{
+    width: 20em;
+    height: 616px;
+    border-radius: 10px;
+    margin-right: 2em
 }
 
-h1{
-    margin-top: 10px;
+.content {
+    width: 100%;
 }
 
-.icons a{
-    margin-top: 40px;
+.book_info p:nth-child(2) {
+    color: grey;
+    font-weight: 700;
+
+    margin-bottom: .2em;
 }
+
+.book_info .title_icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book_info p:nth-child(3) {
+    font-size: 16px;
+    margin-bottom: 1em;
+}
+
+.icons {
+    display: flex;
+
+}
+
+.icons div {
+    width: 32px;
+    height: 32px;
+    opacity: 0.75;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: .5em;
+    /*margin: 5px;*/
+}
+
+.book_info .description {
+    font-weight: 400;
+    font-size: 18px;
+}
+

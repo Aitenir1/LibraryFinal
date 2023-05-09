@@ -1,130 +1,54 @@
-h1{
-    font-size: small;
+.book_list {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.book-info{
+.book {
+    width: 250px;
+    height: 350px;
+    margin-right: 1em;
+    border-radius: 1em;
+    background-size: cover;
     display: flex;
     flex-direction: column;
- }
-
-.book-info a{
-    margin-top: 10px;
-}
-
-
-
-.info{
-    display: flex;
-    flex-direction: column;
-}
-
-tbody{
-    background-color: #5d5c61;
-    border: 2px solid #4a766d;
-    padding-top: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-
-
-.back{
-    font-size: 20px;
-    text-align: center;  
-    margin-top: 20px;  
-}
-
-.back a{
-    border: 2px solid black;
-    border-radius: 3px;
-    background-color: white;
-    color: black;
-    margin: 10px;
-    padding: 7px 18px;
-    font-size: 16px;
-    cursor: pointer;
-    font-family:'Times New Roman', Times, serif ;
-    text-decoration: none;
-}
-
-.back a:hover{
-    background-color: grey;
-}
-
-
-
-.get form{
-
-    width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    transition: all .2s linear;
+    position: relative;
 }
 
-.get .sea{
+.book img {
     width: 100%;
-    height: 30px;
-    border-radius: 10px solid ;
+    height: 100%;
+    /*position: absolute;*/
 }
 
-.get .search{
-    margin: 20px;
-    padding: 10px 20px;
+.book > div {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /*transition: all 0.2s linear;*/
 }
 
-.add{
-    float: right;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 8px 15px;
-}
-
-.add a{
-    font-size: 15px;
-    font-style: initial;
-    font-variant: normal;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-decoration: none;
-    color: black;
-}
-
-.add:hover{
-    background-color: grey;
-}
-
-td{
+.book:hover div, a {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-}
-
-tr{
-    display: flex;
-    flex-direction: row;
-}
-
-.book-info a:link, .book-info a:visited{
-    background-color: white;
-    color: black;
-    border: 2px solid black;
-    border-radius: 7px;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.book-info a:active, .book-info a:hover{
-    background-color: grey;
+    justify-content: center;
+    align-items: center;
     color: white;
 }
 
+.book:hover img {
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
-img{
-    border: 2px solid rgb(160, 160, 160);
+.title a {
+    /*color: black;*/
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 700;
 }

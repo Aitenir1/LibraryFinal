@@ -163,5 +163,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'tenirbook@gmail.com'
-EMAIL_HOST_PASSWORD = 'mmjftmsbtqjjuztk'
-
+EMAIL_HOST_PASSWORD = 'qdbtrhyrdlqbowpd'
